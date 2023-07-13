@@ -18,7 +18,7 @@
             justify-content: center;
             align-items: center;
             margin-bottom: 20px;
-            width: 900px;
+            width: 500px;
             height: auto;
         }
 
@@ -42,13 +42,17 @@
         }
 
         .year-text {
-            font-size: 24px;
+            font-size: 30px;
             margin-bottom: 10px;
+			color: #FFA500;
+			font-family: Verdana;
         }
 
         .progress-text {
-            font-size: 18px;
+            font-size: 20px;
             text-align: center;
+			color: #FFA500;
+			font-family: Verdana;
         }
 
         @keyframes breathe {
@@ -88,7 +92,7 @@
 
         // 更新年份文本
         var yearText = document.getElementById("yearText");
-        yearText.innerHTML = "Year: " + today.getFullYear();
+        yearText.innerHTML = "Year " + today.getFullYear();
 
         // 更新进度条
         var progressContainer = document.getElementById("progressContainer");
@@ -109,7 +113,7 @@
         // 更新进度文本
         var progressText = document.getElementById("progressText");
         var progressPercentage = Math.floor((currentDay / totalDays) * 100);
-        progressText.innerHTML = "Progress: " + currentDay + " / " + totalDays + " (" + progressPercentage + "%)";
+        progressText.innerHTML = "Progress: " + progressPercentage + "% (" + currentDay + "/" + totalDays + ")";
     </script>
 </body>
 </html>
