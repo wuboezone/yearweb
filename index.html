@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Year Progress</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+
+        .progress-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 900px;
+            height: auto;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin: 3px;
+        }
+
+        .past-day {
+            background-color: #4CAF50;
+        }
+
+        .future-day {
+            background-color: #DCDCDC;
+        }
+
+        .current-day {
+            animation: breathe 2s infinite alternate;
+        }
+
+        .year-text {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .progress-text {
+            font-size: 18px;
+            text-align: center;
+        }
+
+        @keyframes breathe {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="year-text" id="yearText"></div>
+    <div class="progress-container" id="progressContainer"></div>
+    <div class="progress-text" id="progressText"></div>
+
+    <script>
+        // 获取当天日期
+        var today = new Date();
+
+        // 获取一年中的第一天
+        var startOfYear = new Date(today.getFullYear(), 0, 1);
+
+        // 获取一年中的最后一天
+        var endOfYear = new Date(today.getFullYear(), 11, 31);
+
+        // 计算进度
+        var totalDays = Math.ceil((endOfYear - startOfYear + 1) / (1000 * 60 * 60 * 24));
+        var currentDay = Math.ceil((today - startOfYear) / (1000 * 60 * 60 * 24));
+
+        // 更新年份文本
+        var yearText = document.getElementById("yearText");
+        yearText.innerHTML = "Year: " + today.getFullYear();
+
+        // 更新进度条
+        var progressContainer = document.getElementById("progressContainer");
+        for (var i = 1; i <= totalDays; i++) {
+            var dot = document.createElement("div");
+            dot.classList.add("dot");
+            if (i <= currentDay) {
+                dot.classList.add("past-day");
+            } else {
+                dot.classList.add("future-day");
+            }
+            if (i === currentDay) {
+                dot.classList.add("current-day");
+            }
+            progressContainer.appendChild(dot);
+        }
+
+        // 更新进度文本
+        var progressText = document.getElementById("progressText");
+        var progressPercentage = Math.floor((currentDay / totalDays) * 100);
+        progressText.innerHTML = "Progress: " + currentDay + " / " + totalDays + " (" + progressPercentage + "%)";
+    </script>
+</body>
+</html>
